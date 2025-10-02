@@ -1,0 +1,13 @@
+{
+  "events": [
+    {
+      "id": "strike",
+      "title": "Nationwide Strike",
+      "description": "Workers across the country have gone on strike, demanding higher wages.",
+      "effects": {
+        "economy": -10,
+        "public_opinion": 5
+      }
+    }
+  ]
+}

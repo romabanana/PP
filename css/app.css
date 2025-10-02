@@ -1,0 +1,119 @@
+#dollar-node {
+    padding: 2;
+    background: magenta;
+}
+
+TreeNode {
+    padding: 2;
+    /* background: magenta; */
+}
+
+/* Main Menu */
+
+Button {
+    align: center middle;
+    width: 100%;
+}
+
+#quit {
+    dock: bottom;
+}
+
+/* Top Bar */
+TopBar {
+    height: auto;
+}
+
+
+#top-bar {
+    layout: grid;
+    grid-size: 4; /* 3 columns by default */
+    grid-columns: 0.5fr 1fr 2fr 0.5fr;
+    grid-rows: 1fr; /* Set the row height to fill the remaining space */
+    height: 1; /* Crucial: make the container take up the rest of the Screen height */
+    background: magenta;
+
+}
+
+/* GameScene */
+
+Screen {
+    /* No layout required here - it defaults to vertical. */
+}
+
+
+#grid-container-main {
+    layout: grid;
+    grid-size: 3; /* 3 columns by default */
+    grid-columns: 1fr 1fr 1fr;
+    grid-rows: 1fr; /* Set the row height to fill the remaining space */
+    height: 1fr; /* Crucial: make the container take up the rest of the Screen height */
+    padding: 0;
+}
+
+.box {
+    content-align: center middle;
+    border: solid red;
+    width: 100%;
+    height: 100%
+}
+
+#main-box {
+    row-span: 2;
+    column-span: 2;
+}
+
+#info-box {
+    border: solid red;
+    width: 100%;
+    height: 100%;
+
+    text-align: justify;
+    row-span: 1;
+    column-span: 2;
+}
+
+#thumbnail {
+    width: 100%;
+    height: 100%;
+    align: center middle;
+    content-align: center middle;
+}
+
+
+#footnote {
+    dock: bottom;
+    background: #666666;
+    padding: 1;
+    text-align: justify;
+}
+
+/* Policy Scene */
+
+#grid-container-policy {
+    layout: grid;
+    grid-size: 2; /* 3 columns by default */
+    grid-columns: 1fr 1fr;
+    grid-rows: 1fr; /* Set the row height to fill the remaining space */
+    height: 1fr; /* Crucial: make the container take up the rest of the Screen height */
+    padding: 0;
+}
+
+#focus {
+    border: solid red;
+    width: 100%;
+    height: 100%;
+    row-span: 4;
+    column-span: 1;
+}
+
+#policy-desc {
+    border: solid red;
+    width: 100%;
+    height: 100%;
+
+    text-align: justify;
+    row-span: 2;
+    column-span: 1;
+}
+
