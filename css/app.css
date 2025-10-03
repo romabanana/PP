@@ -1,16 +1,3 @@
-#dollar-node {
-    padding: 2;
-    background: magenta;
-}
-
-TreeNode {
-    padding: 2;
-    /* background: magenta; */
-}
-Tree > .tree--node-label {
-    color: green;
-}
-
 /* Main Menu */
 
 Button {
@@ -47,8 +34,8 @@ Screen {
 
 #grid-container-main {
     layout: grid;
-    grid-size: 3; /* 3 columns by default */
-    grid-columns: 1fr 1fr 1fr;
+    grid-size: 4; /* 3 columns by default */
+    grid-columns: 2fr 1fr 1fr 0.5fr;
     grid-rows: 1fr; /* Set the row height to fill the remaining space */
     height: 1fr; /* Crucial: make the container take up the rest of the Screen height */
     padding: 0;
@@ -77,6 +64,7 @@ Screen {
 }
 
 #thumbnail {
+    padding: 0;
     width: 100%;
     height: 100%;
     align: center middle;
@@ -96,7 +84,7 @@ Screen {
 #grid-container-policy {
     layout: grid;
     grid-size: 3; /* 3 columns by default */
-    grid-columns: 2fr 1fr 1fr;
+    grid-columns: 2fr 0.5fr 1fr;
     grid-rows: 1fr; /* Set the row height to fill the remaining space */
     height: 1fr; /* Crucial: make the container take up the rest of the Screen height */
     padding: 0;
@@ -106,7 +94,7 @@ Screen {
     border: solid red;
     width: 100%;
     height: 100%;
-    row-span: 4;
+    row-span: 5;
     column-span: 1;
 }
 
@@ -116,7 +104,7 @@ Screen {
     height: 100%;
 
     text-align: justify;
-    row-span: 2;
+    row-span: 3;
     column-span: 2;
 }
 

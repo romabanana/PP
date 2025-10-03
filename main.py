@@ -7,9 +7,14 @@ from pathlib import Path
 
 import json
 
-GIGACHAD = Path("ascii/gigachad.txt").read_text(encoding="utf-8")
-COMMUNIST = Path("ascii/communist.txt").read_text(encoding="utf-8")
+from rich_pixels import Pixels
 
+from PIL import Image
+
+import pygame
+
+GIGACHAD = Path("ascii/arg.txt").read_text(encoding="utf-8")
+COMMUNIST = Path("ascii/tank.txt").read_text(encoding="utf-8")
 DESCRIPTION = """\
 COUNTRY  : PEOPLE'S REPUBLIC of ARGENTINA
 GOVERMENT: TOTALITARIAN DICTATORSHIP
@@ -23,6 +28,10 @@ NEXT ELECTION:
 
 """
 quotes = json.loads(Path("json/quotes.json").read_text())["quotes"]
+k = 0.05
+w = int(90)
+h = int(70)
+pixels = Pixels.from_image_path("img/commie.webp", [w, h])
 
 # events = json.loads(Path("json/events.json").read_text())["events"]
 # print(events[0]["effects"]["economy"])
@@ -72,6 +81,7 @@ class MainMenu(Screen):
         yield Button("Quit", id="quit")
 
 
+
         
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "to_game":
@@ -93,7 +103,7 @@ class CreateCharacter(Screen):
             self.app.player_name = name
             age = self.query_one("#age_input", Input).value
             self.app.player_age = age
-            
+
             
             self.app.push_screen(GameScene())
 
@@ -107,10 +117,14 @@ class GameScene(Screen):
         # All other items go inside the new grid container
         with Container(id="grid-container-main"):
             with Container(id="main-box"):
-                yield Static(COMMUNIST, id="thumbnail")
+                yield Static(pixels, id="thumbnail")
+                # yield ImageView("img/031")
                 yield Static(quotes[0], id="footnote")
             yield Button("POLICY", classes="box", id="policy")
             yield Button("OFFICE", classes="box", id="office")
+            yield Static("t", classes="box")
+            yield Static("t", classes="box")
+           
             yield Static(DESCRIPTION, id="info-box")
             yield Button("NEXT TURN", classes="box",id="next")
         
@@ -118,10 +132,15 @@ class GameScene(Screen):
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "office":
             self.app.push_screen(OfficeScene())
+            self.app.click_sound.play()  # Just play sound, no modifications to UI
+           
         elif event.button.id == "policy":
             self.app.push_screen(PolicyScene())
+            self.app.click_sound.play()  # Just play sound, no modifications to UI
+           
         elif event.button.id == "next":
             self.app.game_state.mana += 1
+            self.app.click_sound.play()  # Just play sound, no modifications to UI
             self.topbar.update()
             
         
@@ -132,31 +151,25 @@ def get_depth(node) -> int:
         node = node.parent
     return depth
 
-def build_tree_from_json(self, tree, data, count=0,parent=None):
+def build_tree_from_json(self, tree, data,parent=None):
     parent = parent or tree.root
     
     for key, value in data.items():
-
-        count += 1
-        if self.app.game_state.focus_array[count] == 1:
-            node = parent.add(f"[green]{key}[/green]", data=value if value else None)
+        node = parent.add(key, data=value if value else None)
+        id = node.id
+        # self.log(count)
+        if self.app.game_state.focus_array[id] == 1:
+            node.set_label(f"[green]{key}[/green]")
             node.expand()
-        elif self.app.game_state.focus_array[count] == 2:
-            node = parent.add(f"[red]{key}[/red]", data=value if value else None)
+        elif self.app.game_state.focus_array[id] == 2:
+            node.set_label(f"[red]{key} (locked)[/red]")
 
-        else:
-            node = parent.add(key, data=value if value else None)
-        
 
         if isinstance(value, dict) and value:
-            build_tree_from_json(self, tree, value, count, node)
+            build_tree_from_json(self, tree, value, node)
 
-# def set_tree_state(self, tree, data, parent= None):
 
 class PolicyScene(Screen):
-    # CSS_PATH = "css/PolicyScene.css"
-
-    # print(events[0]["effects"]["economy"])  
     def compose(self) -> ComposeResult:
         focuses = json.loads(Path("focus/focus_data.json").read_text())["focuses"]
         
@@ -171,13 +184,14 @@ class PolicyScene(Screen):
             tree.ICON_NODE = ''
             tree.ICON_NODE_EXPANDED = ''
 
-            tree.auto_expand = False
+            # tree.auto_expand = False
 
             tree.guide_depth = 2
             self.app.game_state.focus_array[0] = 1
             self.app.game_state.focus = tree.root
             # tree.add_json(data)
             build_tree_from_json(self, tree, data)
+            self.log(self.app.game_state.focus_array)
             # tree_set_state(self, tree, data)
             
             tree.root.expand()
@@ -202,10 +216,12 @@ class PolicyScene(Screen):
             self.log(self.app.game_state.depth)
             self.log(self.app.game_state.focus_array)
             self.app.push_screen(GameScene())
-        elif event.button.id == "focus-button":
+            self.app.click_sound.play()  # Just play sound, no modifications to UI
+           
+        elif event.button.id == "focus-button": 
             if self.app.game_state.focus_array[self.app.game_state.focus.id] == 0:
                 if self.app.game_state.mana >= focuses[self.app.game_state.focus.id]["cost"]: 
-                    self.app.game_state.focus_array[self.app.game_state.depth] = 1
+                    self.app.game_state.focus_array[self.app.game_state.focus.id] = 1
                     self.app.game_state.focus.expand()
                     self.app.game_state.mana -= focuses[self.app.game_state.focus.id]["cost"]
                     self.app.game_state.focus.set_label(f"[green]{self.app.game_state.focus.label}[/green]")
@@ -215,18 +231,26 @@ class PolicyScene(Screen):
                                 sib.set_label(f"[red]{sib.label}[/red]")
                                 self.app.game_state.focus_array[sib.id] = 2
                     self.topbar.update()
+                    self.app.click_sound.play()  # Just play sound, no modifications to UI
+           
 
-    
-
-    def on_tree_node_selected(self, event: Tree.NodeSelected) -> None:
+    def update_focus_tree(self) -> None:
         focuses = json.loads(Path("focus/focus_data.json").read_text())["focuses"]
-        self.app.game_state.focus = event.node
-       
         self.app.game_state.depth = self.app.game_state.focus.id
         self.query_one("#debug1", Static).update(f"{self.app.game_state.depth}")
-        
         self.query_one("#policy-desc", Static).update(focuses[self.app.game_state.focus.id]["desc"])
         self.query_one("#focus-cost", Static).update(str(focuses[self.app.game_state.focus.id]["cost"]))
+
+    def on_tree_node_highlighted(self, event: Tree.NodeHighlighted) -> None:
+        self.app.game_state.focus = event.node
+        self.update_focus_tree()
+       
+
+    def on_tree_node_selected(self, event: Tree.NodeSelected) -> None:
+        self.app.game_state.focus = event.node
+        self.update_focus_tree()
+        self.app.click_sound.play()  # Just play sound, no modifications to UI
+           
        
 
     def on_tree_node_collapsed(self, event: Tree.NodeCollapsed) -> None:
@@ -235,17 +259,10 @@ class PolicyScene(Screen):
        
 
     def on_tree_node_expanded(self, event: Tree.NodeExpanded) -> None:
-        focuses = json.loads(Path("focus/focus_data.json").read_text())["focuses"]
-            
         self.app.game_state.focus = event.node
         id = self.app.game_state.focus.id
-
-        self.app.game_state.depth = self.app.game_state.focus.id
-        self.query_one("#debug1", Static).update(f"{self.app.game_state.depth}")
-        
-        self.query_one("#policy-desc", Static).update(focuses[self.app.game_state.focus.id]["desc"])
-        self.query_one("#focus-cost", Static).update(str(focuses[self.app.game_state.focus.id]["cost"]))
-        
+        self.update_focus_tree()
+       
         if self.app.game_state.focus_array[id] == 0:
             event.node.collapse()
         
@@ -271,6 +288,11 @@ class PoliticsGame(App):
 
     def on_mount(self) -> None:
 
+        pygame.mixer.init()
+        self.click_sound = pygame.mixer.Sound("click.mp3")
+        # music = pygame.mixer.Sound("background.mp3")
+        # music.set_volume(0.1)  # 20% volume
+        # music.play(loops=-1)   # loop forever
         self.game_state = GameState()
         self.push_screen(MainMenu())
 

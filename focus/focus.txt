@@ -1,0 +1,13 @@
+{
+  "Decreto 70/2023": {},
+  "Law and order":{},
+  "Caputo's Plan": {},
+  "Ocampo's Plan": {},
+  "The Eagles":{},
+  "The East Bird's":{},
+  "Bahia Blanca Crisis":{},
+  "Contact the C.G.T":{},
+  "The syndicalist question":{}
+}
+
+{

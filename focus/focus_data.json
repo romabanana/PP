@@ -1,34 +1,41 @@
+
 {
   "focuses": [
     {
-      "desc": "focus",
+      "desc": "root",
       "cost": 0,
       "excludes": [] 
     },
     {
-      "desc": "Start implementing Decreto 70/2023, massive deregulation and institutional reforms.",
-      "cost": 0,
-      "excludes": [] 
-    },
-    {
-      "desc": "Introduce Mass Deregulation: privatizations, open market policies.",
+      "desc": "The current state of the nation demands us to sign this massive decree full of deregulation and institutional reforms, also declare emergency in many areas. The question if the Judicial Power will stand in our way is in the air",
       "cost": 5,
       "excludes": [] 
     },
     {
-      "desc": "Align with IMF to secure funding, under stricter conditions.",
+      "desc": "Following our reform path we must call of extraordinary session of the parlament to treat the 'Bases' laws, a 700 articles project. Deputies and senators are currently will hate us for ending their vacations but we were never friends anyways.",
+      "cost": 5,
+      "excludes": [3] 
+    },
+    {
+      "desc": "The backlash of our first decree must ingnite us to double down and persue greater ambitions!.",
+      "cost": 5,
+      "excludes": [2] 
+    },
+    {
+      "desc": "In order to stabilize and unify the exchange rate Minister Caputo plan pushes a big devaluation and a crawling peg system.",
       "cost": 3,
       "excludes": [] 
     },
     {
-      "desc": "Attempt partial dollarization of the economy.",
-      "cost": 4,
-      "excludes": [5] 
+      "desc": "To lower down inflation our Central Bank must increase its reserves of United States Dollar's which currently stand at negative 11 million.",
+      "cost": 2,
+      "excludes": [6] 
     },
     {
-      "desc": "Apply Fiscal Chainsaw: cut subsidies, reduce state size.",
-      "cost": 5,
-      "excludes": [4] 
+      "desc": "The problem of this nation isn't its people but the currency, which is the currency of the corrupt argentinian politician. We must embrace this reality and the fact that the argentian already choosed its coin: the Dollar.",
+      "cost": 12,
+      "excludes": [5] 
     }
+
   ]
 }
