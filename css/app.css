@@ -7,6 +7,9 @@ TreeNode {
     padding: 2;
     /* background: magenta; */
 }
+Tree > .tree--node-label {
+    color: green;
+}
 
 /* Main Menu */
 
@@ -92,8 +95,8 @@ Screen {
 
 #grid-container-policy {
     layout: grid;
-    grid-size: 2; /* 3 columns by default */
-    grid-columns: 1fr 1fr;
+    grid-size: 3; /* 3 columns by default */
+    grid-columns: 2fr 1fr 1fr;
     grid-rows: 1fr; /* Set the row height to fill the remaining space */
     height: 1fr; /* Crucial: make the container take up the rest of the Screen height */
     padding: 0;
@@ -114,6 +117,6 @@ Screen {
 
     text-align: justify;
     row-span: 2;
-    column-span: 1;
+    column-span: 2;
 }
 

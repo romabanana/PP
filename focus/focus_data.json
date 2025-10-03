@@ -1,96 +1,34 @@
 {
   "focuses": [
     {
+      "desc": "focus",
+      "cost": 0,
+      "excludes": [] 
+    },
+    {
       "desc": "Start implementing Decreto 70/2023, massive deregulation and institutional reforms.",
-      "cost": 0
+      "cost": 0,
+      "excludes": [] 
     },
     {
       "desc": "Introduce Mass Deregulation: privatizations, open market policies.",
-      "cost": 5
+      "cost": 5,
+      "excludes": [] 
     },
     {
       "desc": "Align with IMF to secure funding, under stricter conditions.",
-      "cost": 3
+      "cost": 3,
+      "excludes": [] 
     },
     {
       "desc": "Attempt partial dollarization of the economy.",
-      "cost": 4
+      "cost": 4,
+      "excludes": [5] 
     },
     {
       "desc": "Apply Fiscal Chainsaw: cut subsidies, reduce state size.",
-      "cost": 5
-    },
-    {
-      "desc": "Balance the books and eliminate deficit, gain market confidence.",
-      "cost": 2
-    },
-    {
-      "desc": "Social backlash rises: protests, strikes, unrest.",
-      "cost": 1
-    },
-    {
-      "desc": "Political battle with Congress: choose confrontation or negotiation.",
-      "cost": 0
-    },
-    {
-      "desc": "Govern by decree: faster reforms but higher instability.",
-      "cost": 3
-    },
-    {
-      "desc": "Form alliance with opposition factions: slower reforms, more stability.",
-      "cost": 2
-    },
-    {
-      "desc": "Fight with governors: assert federal control.",
-      "cost": 0
-    },
-    {
-      "desc": "Co-opt key provinces selectively to maintain stability.",
-      "cost": 2
-    },
-    {
-      "desc": "Total war with provinces: high risk of paralysis or rebellion.",
-      "cost": 4
-    },
-    {
-      "desc": "Judicial overhaul: attempt to reshape Supreme Court.",
-      "cost": 3
-    },
-    {
-      "desc": "Judicial resistance occurs: institutional crisis.",
-      "cost": 0
-    },
-    {
-      "desc": "New balance of power achieved: stronger presidential control.",
-      "cost": 2
-    },
-    {
-      "desc": "Security & protest management: policies for public order.",
-      "cost": 1
-    },
-    {
-      "desc": "Control the streets: stability but human rights criticisms.",
-      "cost": 2
-    },
-    {
-      "desc": "Escalation of violence: repression and radicalization.",
-      "cost": 4
-    },
-    {
-      "desc": "Long-term outcome: economic miracle, growth and popularity rise.",
-      "cost": 0
-    },
-    {
-      "desc": "Authoritarian drift: political control increases, risk of unrest.",
-      "cost": 0
-    },
-    {
-      "desc": "Early collapse: economic and political failure.",
-      "cost": 0
-    },
-    {
-      "desc": "Hybrid survival: partial reforms succeed, muddled stability.",
-      "cost": 0
+      "cost": 5,
+      "excludes": [4] 
     }
   ]
 }
